@@ -7,7 +7,7 @@ from tqdm import tqdm
 excel_file = "Calc.xlsx"
 
 # 셀에 입력할 값들
-cell_values = ["SEC1", "SEC2", "SEC3"]
+cell_values = [f"SEC{i}" for i in range(1, 101)]
 
 # 병합된 PDF 파일 경로
 merged_pdf_file = "Appendix_A.pdf"
@@ -16,8 +16,9 @@ merged_pdf_file = "Appendix_A.pdf"
 pdf_files = []
 
 # 엑셀 애플리케이션 객체 생성
-excel_app = win32.gencache.EnsureDispatch("Excel.Application")
+excel_app = win32.Dispatch("Excel.Application")
 excel_app.Visible = False
+excel_app.DisplayAlerts = False
 
 # 엑셀 파일 열기
 workbook = excel_app.Workbooks.Open(os.path.abspath(excel_file))
